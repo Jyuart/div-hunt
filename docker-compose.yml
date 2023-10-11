@@ -1,0 +1,21 @@
+version: "3.9"
+name: div-hunt
+
+services:
+  backend:
+    container_name: div-hunt-backend
+    build: ./backend
+    ports:
+      - 5000:5000
+    environment:
+      - AllowedOrigins=${AllowedOrigins}
+
+  frontend:
+    container_name: div-hunt-frontend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    environment:
+      - VITE_HUB_APP_URL=${VITE_HUB_APP_URL}
+    depends_on:
+      - backend
